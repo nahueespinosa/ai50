@@ -1,5 +1,5 @@
 import unittest
-from tictactoe import O, X, EMPTY, initial_state, player, actions
+from tictactoe import O, X, EMPTY, initial_state, player, actions, result
 
 
 class TestPlayer(unittest.TestCase):
@@ -24,7 +24,7 @@ class TestActions(unittest.TestCase):
         self.assertEqual(actions(initial_state()), self.full_set)
 
     def test_actions_alternate(self):
-        result = set(self.full_set)
+        test_set = set(self.full_set)
         board = initial_state()
         value = X
 
@@ -32,8 +32,29 @@ class TestActions(unittest.TestCase):
             for j, cell in enumerate(row):
                 board[i][j] = value
                 value = X if value == O else O
-                result.remove((i, j))
-                self.assertEqual(actions(board), result)
+                test_set.remove((i, j))
+                self.assertEqual(actions(board), test_set)
+
+
+class TestResult(unittest.TestCase):
+    def test_result(self):
+        board = initial_state()
+        result_board = [[EMPTY, EMPTY, EMPTY],
+                        [EMPTY,     X, EMPTY],
+                        [EMPTY, EMPTY, EMPTY]]
+        self.assertEqual(result(board, (1, 1)), result_board)
+
+        board = result_board
+        result_board = [[EMPTY, EMPTY, EMPTY],
+                        [EMPTY,     X,     O],
+                        [EMPTY, EMPTY, EMPTY]]
+        self.assertEqual(result(board, (1, 2)), result_board)
+
+    def test_result_raises(self):
+        board = initial_state()
+        board[1][1] = X
+        with self.assertRaises(ValueError):
+            result(board, (1, 1))
 
 
 if __name__ == '__main__':
