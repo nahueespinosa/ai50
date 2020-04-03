@@ -43,7 +43,6 @@ def actions(board):
     """
     Returns set of all possible actions (i, j) available on the board.
     """
-
     possible_actions = set()
 
     for i, row in enumerate(board):
@@ -58,7 +57,6 @@ def result(board, action):
     """
     Returns the board that results from making move (i, j) on the board.
     """
-
     if action not in actions(board):
         raise ValueError
 
@@ -72,7 +70,6 @@ def winner(board):
     """
     Returns the winner of the game, if there is one.
     """
-
     wins = [[(0, 0), (0, 1), (0, 2)],
             [(1, 0), (1, 1), (1, 2)],
             [(2, 0), (2, 1), (2, 2)],
@@ -102,14 +99,23 @@ def terminal(board):
     """
     Returns True if game is over, False otherwise.
     """
-    raise NotImplementedError
+    if winner(board) is not None or not actions(board):
+        return True
+    else:
+        return False
 
 
 def utility(board):
     """
     Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
     """
-    raise NotImplementedError
+    winner_player = winner(board)
+    if winner_player == X:
+        return 1
+    elif winner_player == O:
+        return -1
+    else:
+        return 0
 
 
 def minimax(board):
