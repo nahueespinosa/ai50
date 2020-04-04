@@ -1,5 +1,5 @@
 import unittest
-from tictactoe import O, X, EMPTY, initial_state, player, actions, result, winner
+from tictactoe import O, X, EMPTY, initial_state, player, actions, result, winner, minimax
 
 
 class TestPlayer(unittest.TestCase):
@@ -78,6 +78,16 @@ class TestWinner(unittest.TestCase):
                  [O, X, O]]
 
         self.assertEqual(winner(board), X)
+
+
+class TestMinimax(unittest.TestCase):
+    def test_minimax(self):
+        # Based on page 281 of lecture0.pdf
+        board = [[EMPTY, X, O],
+                 [O, X, EMPTY],
+                 [X, EMPTY, O]]
+
+        self.assertEqual(minimax(board), (2, 1))
 
 
 if __name__ == '__main__':
