@@ -14,10 +14,8 @@ CKnave = Symbol("C is a Knave")
 knowledge0 = And(
     # A is a knight if and only if A is not a knave
     Biconditional(AKnight, Not(AKnave)),
-    # If A is a knight then "I am both a knight and a knave" is true
-    Implication(AKnight, And(AKnight, AKnave)),
-    # If A is a knave then "I am both a knight and a knave" is false
-    Implication(AKnave, Not(And(AKnight, AKnave)))
+    # A is a knight if and only if "I am both a knight and a knave" is true
+    Biconditional(AKnight, And(AKnight, AKnave))
 )
 
 # Puzzle 1
@@ -28,10 +26,8 @@ knowledge1 = And(
     Biconditional(AKnight, Not(AKnave)),
     # B is a knight if and only if B is not a knave
     Biconditional(BKnight, Not(BKnave)),
-    # If A is a knight then "We are both knaves" is true
-    Implication(AKnight, And(AKnave, BKnave)),
-    # If A is a knave then "We are both knaves" is false
-    Implication(AKnave, Not(And(AKnave, BKnave)))
+    # A is a knight if and only if "We are both knaves" is true
+    Biconditional(AKnight, And(AKnave, BKnave))
 )
 
 # Puzzle 2
@@ -42,14 +38,10 @@ knowledge2 = And(
     Biconditional(AKnight, Not(AKnave)),
     # B is a knight if and only if B is not a knave
     Biconditional(BKnight, Not(BKnave)),
-    # If A is a knight then "We are the same kind" is true
-    Implication(AKnight, Or(And(AKnave, BKnave), And(AKnight, BKnight))),
-    # If A is a knave then "We are the same kind" is false
-    Implication(AKnave, Not(Or(And(AKnave, BKnave), And(AKnight, BKnight)))),
-    # If B is a knight then "We are of different kinds" is true
-    Implication(BKnight, Or(And(AKnave, BKnight), And(AKnight, BKnave))),
-    # If B is a knave then "We are of different kinds" is false
-    Implication(BKnave, Not(Or(And(AKnave, BKnight), And(AKnight, BKnave)))),
+    # A is a knight if and only if "We are the same kind" is true
+    Biconditional(AKnight, Or(And(AKnave, BKnave), And(AKnight, BKnight))),
+    # B is a knight if and only if "We are different kinds" is true
+    Biconditional(BKnight, Or(And(AKnave, BKnight), And(AKnight, BKnave)))
 )
 
 # Puzzle 3
@@ -58,7 +50,23 @@ knowledge2 = And(
 # B says "C is a knave."
 # C says "A is a knight."
 knowledge3 = And(
-    # TODO
+    # A is a knight if and only if A is not a knave
+    Biconditional(AKnight, Not(AKnave)),
+    # B is a knight if and only if B is not a knave
+    Biconditional(BKnight, Not(BKnave)),
+    # C is a knight if and only if C is not a knave
+    Biconditional(CKnight, Not(CKnave)),
+
+    # One of the following is true:
+    #   A is a knight if and only if "I am a knight" is true
+    #   A is a knight if and only if "I am a knave" is true
+    Or(Biconditional(AKnight, AKnight), Biconditional(AKnight, AKnave)),
+    # B is a knight if and only if "A said 'I am a knave'" is true
+    Biconditional(BKnight, Biconditional(AKnight, AKnave)),
+    # B is a knight if and only if "C is a knave" is true
+    Biconditional(BKnight, CKnave),
+    # C is a knight if and only if "A is a knight" is true
+    Biconditional(CKnight, AKnight)
 )
 
 
