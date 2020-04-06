@@ -136,6 +136,18 @@ class Sentence():
         if cell in self.cells:
             self.cells.remove(cell)
 
+    def infer_from(self, other):
+        """
+        Returns inferred sentence from this and other sentence.
+        If it can't make any inference returns None.
+        """
+        if other.cells.issubset(self.cells):
+            return Sentence(self.cells - other.cells, self.count - other.count)
+        elif self.cells.issubset(other.cells):
+            return Sentence(other.cells - self.cells, other.count - self.count)
+        else:
+            return None
+
 
 class MinesweeperAI():
     """
@@ -191,7 +203,48 @@ class MinesweeperAI():
             5) add any new sentences to the AI's knowledge base
                if they can be inferred from existing knowledge
         """
-        raise NotImplementedError
+        self.moves_made.add(cell)
+        self.mark_safe(cell)
+
+        # Create new sentence and mark already known mines and safes in it
+        new_sentence = Sentence(self.get_neighbors(cell), count)
+
+        for mine in self.mines:
+            new_sentence.mark_mine(mine)
+        for safe in self.safes:
+            new_sentence.mark_safe(safe)
+
+        self.knowledge.append(new_sentence)
+
+        # Mark additional mines and safes if their position can be concluded from the knowledge base
+        new_mines = set()
+        new_safes = set()
+
+        for sentence in self.knowledge:
+            for cell in sentence.known_mines():
+                new_mines.add(cell)
+            for cell in sentence.known_safes():
+                new_safes.add(cell)
+
+        for cell in new_mines:
+            self.mark_mine(cell)
+        for cell in new_safes:
+            self.mark_safe(cell)
+
+        # Add new sentences if they can be inferred from existing knowledge
+        more_sentences = []
+
+        for sentenceA, sentenceB in itertools.combinations(self.knowledge, 2):
+            inference = sentenceA.infer_from(sentenceB)
+            if inference is not None and inference not in self.knowledge:
+                more_sentences.append(inference)
+
+        self.knowledge.extend(more_sentences)
+
+        # Remove empty sentences from the knowledge base
+        for sentence in self.knowledge:
+            if sentence == Sentence(set(), 0):
+                self.knowledge.remove(sentence)
 
     def make_safe_move(self):
         """
@@ -202,7 +255,12 @@ class MinesweeperAI():
         This function may use the knowledge in self.mines, self.safes
         and self.moves_made, but should not modify any of those values.
         """
-        raise NotImplementedError
+        moves_left = self.safes - self.moves_made
+
+        if moves_left:
+            return random.choice(tuple(moves_left))
+        else:
+            return None
 
     def make_random_move(self):
         """
@@ -211,4 +269,30 @@ class MinesweeperAI():
             1) have not already been chosen, and
             2) are not known to be mines
         """
-        raise NotImplementedError
+        moves_left = set(itertools.product(range(0, self.height), range(0, self.width)))
+        moves_left = moves_left - self.mines - self.moves_made
+
+        if moves_left:
+            return random.choice(tuple(moves_left))
+        else:
+            return None
+
+    def get_neighbors(self, cell):
+        """
+        Returns a set containing all neighbors of a given cell.
+        """
+        neighbors = set()
+
+        # Loop over all cells within one row and column
+        for i in range(cell[0] - 1, cell[0] + 2):
+            for j in range(cell[1] - 1, cell[1] + 2):
+
+                # Ignore the cell itself
+                if (i, j) == cell:
+                    continue
+
+                # Add as neighbour if cell in bounds
+                if 0 <= i < self.height and 0 <= j < self.width:
+                    neighbors.add((i, j))
+
+        return neighbors
