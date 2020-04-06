@@ -52,6 +52,10 @@ def load_data(directory):
                 pass
 
 
+class PersonNotFound(Exception):
+    pass
+
+
 def main():
     if len(sys.argv) > 2:
         sys.exit("Usage: python degrees.py [directory]")
@@ -62,26 +66,36 @@ def main():
     load_data(directory)
     print("Data loaded.")
 
-    source = person_id_for_name(input("Name: "))
-    if source is None:
-        sys.exit("Person not found.")
-    target = person_id_for_name(input("Name: "))
-    if target is None:
-        sys.exit("Person not found.")
+    repeat = True
 
-    path = shortest_path(source, target)
+    while repeat is True:
+        print("\nType in the names you want to search...")
 
-    if path is None:
-        print("Not connected.")
-    else:
-        degrees = len(path)
-        print(f"{degrees} degrees of separation.")
-        path = [(None, source)] + path
-        for i in range(degrees):
-            person1 = people[path[i][1]]["name"]
-            person2 = people[path[i + 1][1]]["name"]
-            movie = movies[path[i + 1][0]]["title"]
-            print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+        try:
+            source = person_id_for_name(input("Name: "))
+            if source is None:
+                raise PersonNotFound
+            target = person_id_for_name(input("Name: "))
+            if target is None:
+                raise PersonNotFound
+
+            path = shortest_path(source, target)
+
+            if path is None:
+                print("Not connected.")
+            else:
+                degrees = len(path)
+                print(f"{degrees} degree{'s' if degrees > 1 else ''} of separation.")
+                path = [(None, source)] + path
+                for i in range(degrees):
+                    person1 = people[path[i][1]]["name"]
+                    person2 = people[path[i + 1][1]]["name"]
+                    movie = movies[path[i + 1][0]]["title"]
+                    print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+        except PersonNotFound:
+            print("Person not found.")
+
+        repeat = input("Do you want to search again? (y/n): ").lower().strip()[:1] == "y"
 
 
 def shortest_path(source, target):
