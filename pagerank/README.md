@@ -1,8 +1,8 @@
-## Project 2a: PageRank
+# Project 2a: PageRank
 
 Write an AI to rank web pages by importance.
 
-# Specification
+## Specification
 
 Complete the implementation of `transition_model`, `sample_pagerank`, and `compute_pagerank`.
 
