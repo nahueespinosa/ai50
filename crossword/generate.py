@@ -138,21 +138,20 @@ class CrosswordCreator():
         Return True if arc consistency is enforced and no domains are empty;
         return False if one or more domains end up empty.
         """
-        queue = list()
-
         if arcs is None:
+            arcs = list()
             for x in self.domains:
                 for y in self.crossword.neighbors(x):
-                    queue.append((x, y))
+                    arcs.append((x, y))
 
-        while queue:
-            x, y = queue.pop()
+        while arcs:
+            x, y = arcs.pop()
 
             if self.revise(x, y):
                 if not self.domains[x]:
                     return False
                 for z in self.crossword.neighbors(x) - self.domains[y]:
-                    queue.append((z, x))
+                    arcs.append((z, x))
 
         return True
 
@@ -161,29 +160,28 @@ class CrosswordCreator():
         Return True if `assignment` is complete (i.e., assigns a value to each
         crossword variable); return False otherwise.
         """
-        for var in self.crossword.variables:
-            if var not in assignment:
-                return False
-
-        return True
+        return not bool(self.crossword.variables - set(assignment))
 
     def consistent(self, assignment):
         """
         Return True if `assignment` is consistent (i.e., words fit in crossword
         puzzle without conflicting characters); return False otherwise.
         """
-        used_word = set()
+        used_words = set()
 
         for var in assignment:
 
-            if assignment[var] not in used_word:
-                used_word.add(assignment[var])
+            # All values must be distinct
+            if assignment[var] not in used_words:
+                used_words.add(assignment[var])
             else:
                 return False
 
+            # Every value must have the correct length
             if len(assignment[var]) != var.length:
                 return False
 
+            # There are no conflicts between neighbors
             for neighbor in self.crossword.neighbors(var):
                 if neighbor in assignment:
                     i, j = self.crossword.overlaps[var, neighbor]
