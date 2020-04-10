@@ -199,7 +199,15 @@ class CrosswordCreator():
         The first value in the list, for example, should be the one
         that rules out the fewest values among the neighbors of `var`.
         """
-        return self.domains[var]
+        n = dict()
+
+        for value in self.domains[var]:
+            n[value] = 0
+            for neighbor in self.crossword.neighbors(var) - assignment:
+                if value in self.domains[neighbor]:
+                    n[value] += 1
+
+        return sorted(n, key=n.get)
 
     def select_unassigned_variable(self, assignment):
         """
