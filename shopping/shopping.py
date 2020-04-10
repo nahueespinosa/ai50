@@ -4,8 +4,6 @@ import sys
 from sklearn.model_selection import train_test_split
 from sklearn.neighbors import KNeighborsClassifier
 
-from time import strptime
-
 TEST_SIZE = 0.4
 
 
@@ -64,6 +62,8 @@ def load_data(filename):
     evidence = list()
     labels = list()
 
+    abbr_to_num = dict(Jan=0, Feb=1, Mar=2, Apr=3, May=4, June=5, Jul=6, Aug=7, Sep=8, Oct=9, Nov=10, Dec=11)
+
     with open(filename) as f:
         reader = csv.DictReader(f)
         for row in reader:
@@ -78,7 +78,7 @@ def load_data(filename):
                 float(row["ExitRates"]),
                 float(row["PageValues"]),
                 float(row["SpecialDay"]),
-                strptime(row["Month"], '%b').tm_mon,
+                abbr_to_num[row["Month"]],
                 int(row["OperatingSystems"]),
                 int(row["Browser"]),
                 int(row["Region"]),
