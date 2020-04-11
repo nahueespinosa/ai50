@@ -2,5 +2,6 @@ venv
 .idea
 *.pyc
 __pycache__
+gtsrb-small/*
 gtsrb/*
 !gtsrb/README.md
