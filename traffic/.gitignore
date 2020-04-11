@@ -1,0 +1,6 @@
+venv
+.idea
+*.pyc
+__pycache__
+gtsrb/*
+!gtsrb/README.md
