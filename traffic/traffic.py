@@ -2,9 +2,11 @@ import cv2
 import numpy as np
 import os
 import sys
+from sklearn.model_selection import train_test_split
+
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import tensorflow as tf
 
-from sklearn.model_selection import train_test_split
 
 EPOCHS = 10
 IMG_WIDTH = 30
@@ -95,12 +97,11 @@ def get_model():
         tf.keras.layers.Flatten(),
 
         # Add a hidden layer with dropout
-        tf.keras.layers.Dense(NUM_CATEGORIES * 8, activation="relu"),
+        tf.keras.layers.Dense(NUM_CATEGORIES * 16, activation="relu"),
         tf.keras.layers.Dropout(0.4),
 
-        # Add a hidden layer with dropout
-        tf.keras.layers.Dense(NUM_CATEGORIES * 4, activation="relu"),
-        tf.keras.layers.Dropout(0.2),
+        # Add a hidden layer
+        tf.keras.layers.Dense(NUM_CATEGORIES * 8, activation="relu"),
 
         # Add an output layer with output units for all categories
         tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
