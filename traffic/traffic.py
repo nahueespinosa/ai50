@@ -90,15 +90,18 @@ def get_model():
             32, (3, 3), activation="relu", input_shape=(IMG_WIDTH, IMG_HEIGHT, 3)
         ),
 
-        # Max-pooling layer, using 2x2 pool size
-        tf.keras.layers.MaxPooling2D(pool_size=(2, 2)),
+        # Max-pooling layer, using 3x3 pool size
+        tf.keras.layers.MaxPooling2D(pool_size=(3, 3)),
 
         # Flatten units
         tf.keras.layers.Flatten(),
 
         # Add a hidden layer with dropout
+        tf.keras.layers.Dense(NUM_CATEGORIES * 24, activation="relu"),
+        tf.keras.layers.Dropout(0.2),
+
+        # Add a hidden layer with dropout
         tf.keras.layers.Dense(NUM_CATEGORIES * 16, activation="relu"),
-        tf.keras.layers.Dropout(0.4),
 
         # Add a hidden layer
         tf.keras.layers.Dense(NUM_CATEGORIES * 8, activation="relu"),
