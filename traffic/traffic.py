@@ -95,12 +95,13 @@ def get_model():
 
         # Flatten units
         tf.keras.layers.Flatten(),
-
-        # Add a hidden layer with dropout
-        tf.keras.layers.Dense(NUM_CATEGORIES * 24, activation="relu"),
         tf.keras.layers.Dropout(0.2),
 
         # Add a hidden layer with dropout
+        tf.keras.layers.Dense(NUM_CATEGORIES * 32, activation="relu"),
+        tf.keras.layers.Dropout(0.2),
+
+        # Add a hidden layer
         tf.keras.layers.Dense(NUM_CATEGORIES * 16, activation="relu"),
 
         # Add a hidden layer
