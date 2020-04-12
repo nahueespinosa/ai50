@@ -63,8 +63,8 @@ def load_data(data_dir):
 
     for folder in os.listdir(data_dir):
         folder_path = os.path.join(data_dir, folder)
-        print(f"Loading files from {folder_path}...")
         if os.path.isdir(folder_path):
+            print(f"Loading files from {folder_path}...")
             for file in os.listdir(folder_path):
                 image = cv2.imread(os.path.join(folder_path, file), cv2.IMREAD_COLOR)
                 image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT), interpolation=cv2.INTER_AREA)
@@ -95,8 +95,12 @@ def get_model():
         tf.keras.layers.Flatten(),
 
         # Add a hidden layer with dropout
-        tf.keras.layers.Dense(128, activation="relu"),
-        tf.keras.layers.Dropout(0.5),
+        tf.keras.layers.Dense(NUM_CATEGORIES * 8, activation="relu"),
+        tf.keras.layers.Dropout(0.4),
+
+        # Add a hidden layer with dropout
+        tf.keras.layers.Dense(NUM_CATEGORIES * 4, activation="relu"),
+        tf.keras.layers.Dropout(0.2),
 
         # Add an output layer with output units for all categories
         tf.keras.layers.Dense(NUM_CATEGORIES, activation="softmax")
