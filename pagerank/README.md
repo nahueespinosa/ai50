@@ -2,6 +2,10 @@
 
 Write an AI to rank web pages by importance.
 
+## Video
+
+[![Project 2a: PageRank Video](http://img.youtube.com/vi/sJg6awKEVvI/0.jpg)](https://youtu.be/sJg6awKEVvI)
+
 ## Specification
 
 Complete the implementation of `transition_model`, `sample_pagerank`, and `compute_pagerank`.
