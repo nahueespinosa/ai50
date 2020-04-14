@@ -2,7 +2,16 @@
 
 https://cs50.harvard.edu/ai/
 
-This course explores the concepts and algorithms at the foundation of modern artificial intelligence, diving into the ideas that give rise to technologies like game-playing engines, handwriting recognition, and machine translation. Through hands-on projects, students gain exposure to the theory behind graph search algorithms, classification, optimization, reinforcement learning, and other topics in artificial intelligence and machine learning as they incorporate them into their own Python programs. By course’s end, students emerge with experience in libraries for machine learning as well as knowledge of artificial intelligence principles that enable them to design intelligent systems of their own.
+This course explores the concepts and algorithms at the foundation of modern artificial intelligence, diving into the
+ ideas that give rise to technologies like game-playing engines, handwriting recognition, and machine translation.
+ Through hands-on projects, students gain exposure to the theory behind graph search algorithms, classification,
+ optimization, reinforcement learning, and other topics in artificial intelligence and machine learning as they
+ incorporate them into their own Python programs. By course’s end, students emerge with experience in libraries for
+ machine learning as well as knowledge of artificial intelligence principles that enable them to design intelligent
+ systems of their own.
+
+# Notes
+I've taken some notes on key concepts and algorithms throughout the lectures for future reference. 
 
 ## Lecture 0: Search
 
@@ -25,8 +34,8 @@ This course explores the concepts and algorithms at the foundation of modern art
 - **Minimax**: adversarial search algorithm.
 
 ### Projects
-- Degrees
-- Tic-Tac-Toe
+- [Degrees](https://github.com/nahueespinosa/ai50/tree/master/degrees)
+- [Tic-Tac-Toe](https://github.com/nahueespinosa/ai50/tree/master/tictactoe)
 
 ## Lecture 1: Knowledge
 
@@ -44,8 +53,8 @@ This course explores the concepts and algorithms at the foundation of modern art
 - **Conversion to CNF** and **Inference by resolution**
 
 ### Projects
-- Knights
-- Minesweeper
+- [Knights](https://github.com/nahueespinosa/ai50/tree/master/knights)
+- [Minesweeper](https://github.com/nahueespinosa/ai50/tree/master/minesweeper)
 
 ## Lecture 2: Uncertainty
 
@@ -67,8 +76,8 @@ This course explores the concepts and algorithms at the foundation of modern art
 - **Likelihood weighting**
 
 ### Projects
-- Heredity
-- PageRank
+- [Heredity](https://github.com/nahueespinosa/ai50/tree/master/heredity)
+- [PageRank](https://github.com/nahueespinosa/ai50/tree/master/pagerank)
 
 ## Lecture 3: Optimization
 
@@ -92,23 +101,22 @@ This course explores the concepts and algorithms at the foundation of modern art
     - **Backtracking search**
 
 ### Projects
-- Crossword
+- [Crossword](https://github.com/nahueespinosa/ai50/tree/master/crossword)
     
 ## Lecture 4: Learning
 
 ### Concepts
 - **Supervised learning**: given a data set of input-output pairs, learn a function to map inputs to outputs.
-- **Classification**: supervised learning task of learning a function mapping an input point to a discrete category.
-- **Regression**: supervised learning task of learning a function mapping and input point to a continuous value.
-- **Loss function**: function that express how poorly our hypothesis performs (L1, L2).
-- **Overfitting**: when a model fits too closely to a particular data set and therefore may fail to generalize to
- future data.
-- **Regularization**: penalizing hypotheses that are more complex to favor simpler, more general hypotheses.
-- **Holdout cross-validation**: splitting data into a training set and a test set, such that learning happens on the
- training set and is evaluated on the test set.
-- **k-fold cross-validation**: splitting data into _k_ sets, and experimenting _k_ times, using each set as a test
- set once, and using remaining data as training set.
- 
+    - **Classification**: supervised learning task of learning a function mapping an input point to a discrete category.
+    - **Regression**: supervised learning task of learning a function mapping and input point to a continuous value.
+    - **Loss function**: function that express how poorly our hypothesis performs (L1, L2).
+    - **Overfitting**: when a model fits too closely to a particular data set and therefore may fail to generalize to
+     future data.
+    - **Regularization**: penalizing hypotheses that are more complex to favor simpler, more general hypotheses.
+    - **Holdout cross-validation**: splitting data into a training set and a test set, such that learning happens on the
+     training set and is evaluated on the test set.
+    - **k-fold cross-validation**: splitting data into _k_ sets, and experimenting _k_ times, using each set as a test
+     set once, and using remaining data as training set.
 - **Reinforcement learning**: given a set of rewards or punishments, learn what actions to take in the future.
 - **Unsupervised learning**: given input data without any additional feedback, learn patterns.
 - **Clustering**: organizing a set of objects into groups in such a way that similar objects tend to be in the same
@@ -126,8 +134,8 @@ This course explores the concepts and algorithms at the foundation of modern art
  clusters' centers.
 
 ### Projects
-- Shopping
-- Nim
+- [Shopping](https://github.com/nahueespinosa/ai50/tree/master/shopping)
+- [Nim](https://github.com/nahueespinosa/ai50/tree/master/nim)
 
 ## Lecture 5: Neural Networks
 
@@ -149,4 +157,41 @@ This course explores the concepts and algorithms at the foundation of modern art
 - **Backpropagation**: algorithm for training neural networks with hidden layers.
 
 ### Projects
-- Traffic
+- [Traffic](https://github.com/nahueespinosa/ai50/tree/master/traffic)
+
+## Lecture 6: Language
+
+### Concepts
+- **Natural language processing**
+- **n-gram**: a continuous sequence of _n_ items inside of a text.
+- **Tokenization**: the task of splitting a sequence of characters into pieces (tokens).
+- **Text Categorization**
+    - **Bag-of-words model**: represent text as an unordered collection of words.
+- **Information retrieval**: the task of finding relevant documents in response to a user query.
+    - **Topic modeling**: models for discovering the topics for a set of documents.
+    - **Term frequency**: number of times a term appears in a document.
+        - **Function words**: words that have little meaning on their own, but are used to grammatically connect other words.
+        - **Content words**: words that carry meaning independently.
+    - **Inverse document frequency**: measure of how common or rare a word is across documents.
+- **Information extraction**: the task of extracting knowledge from documents.
+- **WordNet**: a lexical database of semantic relations between words.
+- **Word representation**: looking for a way to represent the meaning of a word for further processing.
+    - **one-hot**: representation of meaning as a vector with a single 1, and with other values as 0.
+    - **distribution**: representation of meaning distributed across multiple values.
+
+### Algorithms
+- **Markov model applied to language**: generating the next word based on the previous words and a probability.
+- **Naive Bayes**: based on the Bayes' Rule to calculate probability of a text being in a certain category, given it
+ contains specific words. Assuming every word is independent of each other.
+    - **Additive smoothing**: adding a value _a_ to each value in our distribution to smooth the data.
+    - **Laplace smoothing**: adding 1 to each value in our distribution (pretending we've seen each value one more time
+ than we actually have).
+- **tf-idf**: ranking of what words are important in a document by multiplying term frequency (TF) by inverse
+ document frequency (IDF).
+- **Automated template generation**: giving AI some terms and let it look into a corpus for patterns where those
+ terms show up together. Then it can use those templates to extract new knowledge from the corpus.
+- **word2vec**: model for generating word vectors.
+- **skip-gram architecture**: neural network architecture for predicting context words given a target word.
+
+### Projects
+Not published yet: _Coming on April 20th 2020_
