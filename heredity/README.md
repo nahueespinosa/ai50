@@ -30,6 +30,10 @@ Lily:
     False: 1.0000
 ```
 
+## Video
+
+[![Project 2b: Heredity Video](http://img.youtube.com/vi/-lZbkvv-fm8/0.jpg)](https://youtu.be/-lZbkvv-fm8)
+
 ## Specification
 
 Complete the implementations of `joint_probability`, `update`, and `normalize`.

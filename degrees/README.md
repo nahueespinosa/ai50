@@ -14,6 +14,10 @@ Name: Jennifer Lawrence
 3: Michael Fassbender and Jennifer Lawrence starred in X-Men: First Class
 ```
 
+## Video
+
+[![Project 0a: Degrees Video](http://img.youtube.com/vi/MKWrQO8cI8c/0.jpg)](https://youtu.be/MKWrQO8cI8c)
+
 ## Background
 
 According to the [Six Degrees of Kevin Bacon](https://en.wikipedia.org/wiki/Six_Degrees_of_Kevin_Bacon) game, anyone in the Hollywood film industry can be connected to Kevin Bacon within six steps, 

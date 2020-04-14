@@ -2,6 +2,10 @@
 
 Using Minimax, implement an AI to play Tic-Tac-Toe optimally.
 
+## Video
+
+[![Project 0b: Tic-Tac-Toe Video](http://img.youtube.com/vi/msadKqBoPCo/0.jpg)](https://youtu.be/msadKqBoPCo)
+
 ## Specification
 
 Complete the implementations of `player`, `actions`, `result`, `winner`, `terminal`, `utility`, and `minimax`.

@@ -2,6 +2,10 @@
 
 Write a program to solve logic puzzles.
 
+## Video
+
+[![Project 1a: Knights Video](http://img.youtube.com/vi/NagQUqtGMt8/0.jpg)](https://youtu.be/NagQUqtGMt8)
+
 ## Background
 
 In 1978, logician Raymond Smullyan published “What is the name of this book?”, a book of logical puzzles. Among the puzzles in the book were a class of puzzles that Smullyan called “Knights and Knaves” puzzles.
