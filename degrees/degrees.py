@@ -62,40 +62,40 @@ def main():
     directory = sys.argv[1] if len(sys.argv) == 2 else "large"
 
     # Load data from files into memory
-    print("Loading data...")
+    print("Cargando datos...")
     load_data(directory)
-    print("Data loaded.")
+    print("Datos listos.")
 
     repeat = True
 
     while repeat is True:
-        print("\nType in the names you want to search...")
+        print("\nEscribe los nombres que quieras buscar...")
 
         try:
-            source = person_id_for_name(input("Name: "))
+            source = person_id_for_name(input("Primera persona: "))
             if source is None:
                 raise PersonNotFound
-            target = person_id_for_name(input("Name: "))
+            target = person_id_for_name(input("Segunda persona: "))
             if target is None:
                 raise PersonNotFound
 
             path = shortest_path(source, target)
 
             if path is None:
-                print("Not connected.")
+                print("No conectado.")
             else:
                 degrees = len(path)
-                print(f"{degrees} degree{'s' if degrees > 1 else ''} of separation.")
+                print(f"{degrees} grado{'s' if degrees > 1 else ''} de separación.")
                 path = [(None, source)] + path
                 for i in range(degrees):
                     person1 = people[path[i][1]]["name"]
                     person2 = people[path[i + 1][1]]["name"]
                     movie = movies[path[i + 1][0]]["title"]
-                    print(f"{i + 1}: {person1} and {person2} starred in {movie}")
+                    print(f"{i + 1}: {person1} y {person2} protagonizaron {movie}")
         except PersonNotFound:
-            print("Person not found.")
+            print("No se encuentra a la persona.")
 
-        repeat = input("Do you want to search again? (y/n): ").lower().strip()[:1] == "y"
+        repeat = input("¿Querés buscar de nuevo? (s/n): ").lower().strip()[:1] == "s"
 
 
 def shortest_path(source, target):
@@ -155,16 +155,16 @@ def person_id_for_name(name):
     if len(person_ids) == 0:
         return None
     elif len(person_ids) > 1:
-        print(f"Which '{name}'?")
-        for person_id in person_ids:
+        print(f"Cuál '{name}'?")
+        for index, person_id in enumerate(person_ids):
             person = people[person_id]
             name = person["name"]
             birth = person["birth"]
-            print(f"ID: {person_id}, Name: {name}, Birth: {birth}")
+            print(f"ID: {index}, Nombre: {name}, Nacimiento: {birth}")
         try:
-            person_id = input("Intended Person ID: ")
-            if person_id in person_ids:
-                return person_id
+            index = int(input("ID seleccionado: "))
+            if 0 <= index < len(person_ids):
+                return person_ids[index]
         except ValueError:
             pass
         return None
