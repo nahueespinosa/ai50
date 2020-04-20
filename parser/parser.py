@@ -18,7 +18,7 @@ V -> "smiled" | "tell" | "were"
 NONTERMINALS = """
 S -> NP VP | S Conj S | NP VP Conj VP
 AP -> Adj | Adj AP
-NP -> N | Det NP | AP NP | N PP
+NP -> N | Det NP | AP NP | NP PP
 PP -> P NP | P S
 VP -> V | V NP | V NP PP | V PP | VP Adv | Adv VP
 """
