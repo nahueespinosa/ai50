@@ -194,4 +194,5 @@ I've taken some notes on key concepts and algorithms throughout the lectures for
 - **skip-gram architecture**: neural network architecture for predicting context words given a target word.
 
 ### Projects
-Not published yet: _Coming on April 20th 2020_
+- [Parser](https://github.com/nahueespinosa/ai50/tree/master/parser)
+- [Questions](https://github.com/nahueespinosa/ai50/tree/master/questions)
