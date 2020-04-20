@@ -79,7 +79,21 @@ def np_chunk(tree):
     whose label is "NP" that does not itself contain any other
     noun phrases as subtrees.
     """
-    raise NotImplementedError
+    return [subtree for subtree in tree.subtrees(is_np_chunk)]
+
+
+def is_np_chunk(tree):
+    """
+    Returns true if given tree is a NP chunk.
+    A noun phrase chunk is defined as any subtree of the sentence
+    whose label is "NP" that does not itself contain any other
+    noun phrases as subtrees.
+    """
+    if tree.label() == 'NP' and \
+            not list(tree.subtrees(lambda t: t.label() == 'NP' and t != tree)):
+        return True
+    else:
+        return False
 
 
 if __name__ == "__main__":
