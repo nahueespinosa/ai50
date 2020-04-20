@@ -19,7 +19,7 @@ holmes
 
 ## Video
 
-[![Project 6a: Parser Video](http://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://youtu.be/VIDEO_ID)
+[![Project 6a: Parser Video](http://img.youtube.com/vi/tBSRlNXgnog/0.jpg)](https://youtu.be/tBSRlNXgnog)
 
 ## Background
 
