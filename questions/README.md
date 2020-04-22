@@ -18,7 +18,7 @@ Neurons of one layer connect only to neurons of the immediately preceding and im
 
 ## Video
 
-[![Project 6b: Questions Video](http://img.youtube.com/vi/VIDEO_ID/0.jpg)](https://youtu.be/VIDEO_ID)
+[![Project 6b: Questions Video](http://img.youtube.com/vi/kv9RDo-eDzo/0.jpg)](https://youtu.be/kv9RDo-eDzo)
 
 ## Background
 
