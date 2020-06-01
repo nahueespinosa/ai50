@@ -68,10 +68,14 @@ def load_data(data_dir):
         if os.path.isdir(folder_path):
             print(f"Loading files from {folder_path}...")
             for file in os.listdir(folder_path):
-                image = cv2.imread(os.path.join(folder_path, file), cv2.IMREAD_COLOR)
-                image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT), interpolation=cv2.INTER_AREA)
-                images.append(image)
-                labels.append(int(folder))
+                try:
+                    image = cv2.imread(os.path.join(folder_path, file), cv2.IMREAD_COLOR)
+                    image = cv2.resize(image, (IMG_WIDTH, IMG_HEIGHT), interpolation=cv2.INTER_AREA)
+                    images.append(image)
+                    labels.append(int(folder))
+                except Exception as e:
+                    print(f"There is a problem with file: {file}")
+                    print(str(e))
 
     return images, labels
 
